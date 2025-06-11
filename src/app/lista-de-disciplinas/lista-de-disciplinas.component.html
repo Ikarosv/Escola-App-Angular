@@ -1,1 +1,16 @@
-<p>lista-de-disciplinas works!</p>
+<h1>Disciplinas</h1>
+<hr>
+<ul>
+    <!-- <li *ngFor="let disciplina of disciplinas" class="disciplina">
+        <div class="disciplinaNome">{{disciplina.nome}}</div>
+        <div class="disciplinaDescricao">{{disciplina.descricao}}</div>
+    </li> -->
+    @for (disciplina of disciplinas; track disciplina.nome) {
+        <li class="disciplina" (click)="selecionar(disciplina)">
+            <p [class.selecionado]="selecionado == disciplina" class="disciplinaNome">{{disciplina.nome}}</p>
+            @if (selecionado == disciplina) {
+                <p class="disciplinaDescricao">{{disciplina.descricao}}</p>
+            }
+        </li>
+    }
+</ul>

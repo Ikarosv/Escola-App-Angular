@@ -1,0 +1,27 @@
+.selecionado {
+    font-weight: bold;
+}
+
+.disciplina {
+    list-style: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.disciplinaNome {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12pt;
+}
+
+.disciplina:hover .disciplinaNome {
+    font-weight: bold;
+}
+
+.disciplinaDescricao {
+    font-size: 10pt;
+}
+
+.disciplina:hover {
+    background: #0e0e0e;
+    border-radius: 10px;
+}
