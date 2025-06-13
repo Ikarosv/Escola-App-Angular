@@ -8,10 +8,123 @@
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
+ .selecionado {
+  font-weight: bold;
+}
+
+.disciplina {
+  list-style: none;
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.disciplinaNome {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12pt;
+}
+
+.disciplina:hover .disciplinaNome {
+  font-weight: bold;
+}
+
+.disciplinaDescricao {
+  font-size: 10pt;
+}
+
+.disciplina:hover {
+  background: #0e0e0e;
+  border-radius: 10px;
+}
+
+.btn {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.btn-danger {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: bold;
+  border: none;
+  color: white;
+  background: #db1b1b;
+}
+
+.btn-secondary {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: bold;
+  border: 1px solid rgb(171 178 191);
+  color: rgb(171 178 191);
+  background: none;
+}
+
+.btn-secondary:hover {
+  background: rgb(171 178 191 / 0.2);
+}
+
+.btn-primary {
+  border: 1px solid rgb(199 120 221);
+  color: white;
+  font-weight: bold;
+  background: none;
+}
+
+.input {
+  border: 1px solid rgb(171 178 191);
+  color: rgb(171 178 191);
+  background: none;
+}
+
+.btn-primary:hover {
+  background: rgb(199 120 221 / 0.2);
+}
+
+.flex {
+  display: flex;
+}
+
+.gap-5 {
+  gap: 5px;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+}
+
+.p-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.gap-20 {
+  gap: 20px;
+}
+
+.flex-col {
+  flex-direction: column;
+}
 
  html {
     line-height: 1.15; /* 1 */
     -webkit-text-size-adjust: 100%; /* 2 */
+    font-family: Arial, Helvetica, sans-serif;
   }
   
   /* Sections

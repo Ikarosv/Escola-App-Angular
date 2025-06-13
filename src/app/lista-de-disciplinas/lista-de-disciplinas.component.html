@@ -1,16 +1,22 @@
-<h1>Disciplinas</h1>
-<hr>
-<ul>
-    <!-- <li *ngFor="let disciplina of disciplinas" class="disciplina">
-        <div class="disciplinaNome">{{disciplina.nome}}</div>
-        <div class="disciplinaDescricao">{{disciplina.descricao}}</div>
-    </li> -->
-    @for (disciplina of disciplinas; track disciplina.nome) {
-        <li class="disciplina" (click)="selecionar(disciplina)">
-            <p [class.selecionado]="selecionado == disciplina" class="disciplinaNome">{{disciplina.nome}}</p>
-            @if (selecionado == disciplina) {
-                <p class="disciplinaDescricao">{{disciplina.descricao}}</p>
+<section class="flex gap-20">
+    <section>
+        <h1>Disciplinas</h1>
+        <hr>
+        <ul>
+            @for (disciplina of disciplinas; track disciplina.nome) {
+                <li class="disciplina" (click)="selecionar(disciplina)">
+                    <div>
+                        <p [class.selecionado]="selecionado == disciplina" class="disciplinaNome">{{disciplina.nome}}</p>
+                        @if (selecionado == disciplina) {
+                            <p class="disciplinaDescricao">{{disciplina.descricao}}</p>
+                        }
+                    </div>
+                    <div class="flex gap-5">
+                        <button (click)="editar(disciplina)" class="btn btn-secondary">Editar</button>
+                        <button (click)="excluir(disciplina)" class="btn btn-danger">Excluir</button>
+                    </div>
+                </li>
             }
-        </li>
-    }
-</ul>
+        </ul>
+    </section>
+</section>

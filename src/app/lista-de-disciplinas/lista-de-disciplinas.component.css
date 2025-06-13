@@ -6,6 +6,9 @@
     list-style: none;
     padding: 5px;
     cursor: pointer;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
 }
 
 .disciplinaNome {
@@ -24,4 +27,56 @@
 .disciplina:hover {
     background: #0e0e0e;
     border-radius: 10px;
+}
+
+.btn {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.btn-danger {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+    border: none;
+    color: white;
+    background: #db1b1b;
+}
+
+.btn-secondary {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+    border: 1px solid rgb(171 178 191);
+    color: rgb(171 178 191);
+    background: none;
+}
+
+.btn-secondary:hover {
+    background: rgb(171 178 191 / 0.2);
+}
+
+.btn-primary {
+    border: 1px solid rgb(199 120 221);
+    color: white;
+    font-weight: bold;
+    background: none;
+}
+
+.input {
+    border: 1px solid rgb(171 178 191);
+    color: rgb(171 178 191);
+    background: none;
+}
+
+.btn-primary:hover {
+    background: rgb(199 120 221 / 0.2);
+}
+
+.flex {
+    display: flex;
+}
+
+.gap-5 {
+    gap: 5px;
 }

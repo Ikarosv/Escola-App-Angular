@@ -3,7 +3,48 @@
     <div class="content">
       <div class="left-side">
         <h1 class="capitalize">Olá, Estudante!</h1>
-        <app-lista-de-disciplinas/>
+        <section class="flex gap-20">
+          <app-lista-de-disciplinas
+          (onSelecionar)="selecionar($event)"
+          (onExcluir)="excluir($event)"
+          (onEditar)="editar($event)"
+          [disciplinas]="disciplinas"
+          [selecionado]="selecionado"
+          />
+          <app-editor-de-disciplina
+            (onSalvar)="salvar()"
+            [nome]="nome"
+            [descricao]="descricao"
+            [editando]="editando"
+          />
+          <!-- <section class="flex flex-col gap-5">
+            <h2>Cadastrar</h2>
+            <p>Use este formulário para cadastrar uma disciplina.</p>
+            <form #cadastro="ngForm" (submit)="salvar()">
+                <div>
+                    <label for="nome">Nome</label><br>
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        class="input p-2"
+                        [(ngModel)]="nome"
+                        required />
+                </div>
+                <div>
+                    <label for="descricao">Descrição</label><br>
+                    <textarea class="input" id="descricao" name="descricao" [(ngModel)]="descricao" cols="70" rows="5" required>
+                    </textarea>
+                </div>
+                <div class="flex gap-5">
+                    <button type="submit" class="btn btn-primary" [disabled]="!cadastro.valid">Salvar</button>
+                    @if (editando) {
+                        <button type="reset" class="btn btn-secondary" (click)="cancelar()" [disabled]="!cadastro.valid">Cancelar</button>
+                    }
+                </div>
+            </form>
+        </section> -->
+        </section>
       </div>
     </div>
   </main>
