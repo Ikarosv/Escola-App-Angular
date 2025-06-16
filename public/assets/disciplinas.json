@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "nome": "Língua Portuguesa",
+    "descricao": "Estudo da língua portuguesa, incluindo gramática, interpretação de textos, ortografia e produção textual."
+  },
+  {
+    "id": 2,
+    "nome": "Arte",
+    "descricao": "Exploração de diversas formas de expressão artística, como pintura, música, teatro e história da arte."
+  },
+  {
+    "id": 3,
+    "nome": "Educação Física",
+    "descricao": "Prática de atividades físicas e esportes visando o desenvolvimento motor, social e da saúde."
+  },
+  {
+    "id": 4,
+    "nome": "Matemática",
+    "descricao": "Estudo dos números, operações, geometria, álgebra, estatística e raciocínio lógico."
+  },
+  {
+    "id": 5,
+    "nome": "História",
+    "descricao": "Análise de eventos históricos, sociedades antigas e modernas, e a construção da cidadania."
+  },
+  {
+    "id": 6,
+    "nome": "Geografia",
+    "descricao": "Estudo do espaço geográfico, clima, relevo, populações, e suas interações com o meio ambiente."
+  },
+  {
+    "id": 7,
+    "nome": "Ciências",
+    "descricao": "Compreensão dos fenômenos naturais através da biologia, química, física e ciências da Terra."
+  },
+  {
+    "id": 8,
+    "nome": "Redação",
+    "descricao": "Desenvolvimento da escrita formal com foco em coesão, coerência e argumentação."
+  },
+  {
+    "id": 9,
+    "nome": "Língua Estrangeira Moderna - Inglês",
+    "descricao": "Aprendizado da língua inglesa com foco em leitura, escrita, compreensão e conversação."
+  },
+  {
+    "id": 10,
+    "nome": "Ensino Religioso",
+    "descricao": "Estudo das diferentes religiões, valores éticos e morais, promovendo respeito e tolerância."
+  }
+]
