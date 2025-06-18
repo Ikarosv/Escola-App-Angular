@@ -22,9 +22,7 @@ export class AppComponent {
   disciplinas: Disciplina[] = [];
 
   constructor(private disciplinasService: DisciplinasService) {
-    this.disciplinasService.carregarDados(() => {
-      this.disciplinas = this.disciplinasService.todas();
-    })
+    this.atualizarLista()
   }
 
   selecionar(disciplina: Disciplina) {
@@ -32,7 +30,19 @@ export class AppComponent {
   }
 
   salvar() {
-    if (this.editando){
+    try {
+      if (this.editando) {
+        this.disciplinasService.salvar(this.editando?.id, this.nome.value as string)
+        .subscribe(() => this.atualizarLista())
+        this.editando = null
+      } else {
+        this.disciplinasService.salvar(null, this.nome.value as string, this.descricao.value as string)
+        .subscribe(() => this.atualizarLista())
+      }
+    } catch(e) {
+      console.log(e)
+    }
+    /* if (this.editando){
       this.disciplinasService.salvar(this.editando.id, this.nome.value as string, this.descricao.value as string);
     } else {
       const novaDisciplina = new Disciplina(disciplinas.length + 1, this.nome.value as string, this.descricao.value as string);
@@ -40,7 +50,7 @@ export class AppComponent {
     }
     this.nome.setValue("");
     this.descricao.setValue("");
-    this.editando = null
+    this.editando = null */
   }
 
   excluir(disciplina: Disciplina) {
@@ -49,13 +59,18 @@ export class AppComponent {
     } else {
       if(confirm(`Tem certeza que deseja excluir a disciplina ${disciplina.nome} ?`)) {
         this.disciplinasService.excluir(disciplina);
+        this.atualizarLista()
       }
     }
   }
 
   editar(disciplina: Disciplina) {
     this.nome.setValue(disciplina.nome);
-    this.descricao.setValue(disciplina.descricao);
+    /* this.descricao.setValue(disciplina.descricao); */
     this.editando = disciplina;
+  }
+
+  atualizarLista() {
+    this.disciplinasService.todas().subscribe((allDisciplinas) => this.disciplinas = allDisciplinas)
   }
 }

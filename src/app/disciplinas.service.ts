@@ -8,50 +8,60 @@ import disciplinas from '../../public/assets/disciplinas.json';
   providedIn: 'root'
 })
 export class DisciplinasService {
-  private disciplinas: Disciplina[] | null = null;
+  API_URL = 'http://localhost:3000'
+  private disciplinas: Disciplina[] = [];
   private novo_id = disciplinas.length + 1;
 
   constructor(private http: HttpClient) {
-    /* this.carregarDados(() => {});
-    this.disciplinas = disciplinas.map((d, i) => new Disciplina(i+1, d.nome, d.descricao)); */
+    this.todas().subscribe(data => this.disciplinas = data)
   }
 
-  carregarDados(callback: () => void): void {
-    this.http.get<Disciplina[]>('assets/disciplinas.json')
-    .subscribe(data => {
-      console.log('Disciplinas carregadas:', data);
-      this.disciplinas = data.map((d, i) => new Disciplina(i + 1, d.nome as string, d.descricao as string))})
-    .add(callback);
+  todas() {
+    return this.http.get<Disciplina[]>(this.API_URL + '/disciplinas')
   }
 
-  todas(): Disciplina[] {
-    if (this.disciplinas === null) {
-      throw new Error('Disciplinas não carregadas');
+  salvar(id: number | null, nome: string, descricao?: string) {
+    let disciplina = {
+      id,
+      nome,
+      descricao
     }
-    return this.disciplinas;
-  }
-
-  salvar(id: number | null, nome: string, descricao: string): Disciplina {
     if (id) {
-      let d = this.encontrar(id);
+      console.log('salvar', disciplina)
+      return this.http.patch(this.API_URL + "/disciplinas/" + id, disciplina)
+      /* let d = this.encontrar(id);
       if (d) {
         d.nome = nome;
         d.descricao = descricao;
         return d;
       }
-      throw new Error('Disciplina não encontrada');
+      throw new Error('Disciplina não encontrada'); */
+    } else {
+      disciplina.id = this.gerarProximoId()
+      console.log('salvar', disciplina)
+      return this.http.post(this.API_URL + '/disciplinas', disciplina, {
+        observe: 'body'
+      })
     }
-    const disciplina = new Disciplina(this.novo_id, nome, descricao);
+    /* const disciplina = new Disciplina(this.novo_id, nome, descricao);
     if (this.disciplinas === null) {
       this.disciplinas = [];
     }
     this.disciplinas.push(disciplina);
-    this.novo_id++;
-    return disciplina;
+    this.novo_id++; */
+    /* return disciplina; */
   }
 
-  excluir(disciplina: number | Disciplina): void {
-    let d = null;
+  excluir(disciplina: number | Disciplina) {
+    let id;
+    if (typeof disciplina == 'number') {
+      id = disciplina
+    } else {
+      id = disciplina.id
+    }
+    console.log(this.API_URL + '/disciplinas/' + id)
+    return this.http.delete(this.API_URL + '/disciplinas/' + id)
+   /*  let d = null;
     if (this.disciplinas === null) {
       throw new Error('Disciplinas não carregadas');
     }
@@ -67,10 +77,11 @@ export class DisciplinasService {
       } else {
         throw new Error('Disciplina não encontrada');
       }
-    }
+    } */
   }
 
-  encontrar(arg: number | string): Disciplina | null {
+  /* encontrar(arg: number | string): Disciplina | null {
+    return this.http.get<Disciplina | null>(this.API_URL + '/disciplinas/' + arg)
     if (this.disciplinas === null) {
       throw new Error('Disciplinas não carregadas');
     }
@@ -80,5 +91,13 @@ export class DisciplinasService {
       return this.disciplinas.find(d => d.nome?.toLowerCase() === arg.toLowerCase()) || null;
     }
     return null;
+  } */
+
+  gerarProximoId() {
+    this.todas().subscribe((data) => this.disciplinas = data)
+    if (this.disciplinas?.length === 0) return 1;
+
+    const maiorId = Math.max(...this.disciplinas?.map((d) => d.id));
+    return maiorId + 1
   }
 }
