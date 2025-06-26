@@ -25,8 +25,7 @@ export class ListaDeDisciplinasComponent {
   
   excluir(disciplina: Disciplina) {
     if(confirm(`Tem certeza que deseja excluir a disciplina ${disciplina.nome} ?`)) {
-      this.disciplinasService.excluir(disciplina);
-      this.atualizarLista()
+      this.disciplinasService.excluir(disciplina, () => this.atualizarLista());
     }
   }
 

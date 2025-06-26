@@ -1,7 +1,7 @@
 import { Component, EventEmitter, inject, Input, Output,  } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Disciplina } from '../lista-de-disciplinas/disciplina.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DisciplinasService } from '../disciplinas.service';
 
 @Component({
@@ -16,8 +16,10 @@ export class EditorDeDisciplinaComponent {
   nome = new FormControl('');
   descricao = new FormControl<string | undefined>('');
   editando: Disciplina | null = null
+  private router = inject(Router);
 
   constructor(private disciplinasService: DisciplinasService) {
+
     this.activatedRoute.params.subscribe((params) => {
       if (params['id']) {
         this.disciplinasService.encontrar(params['id']).subscribe((disciplina) => {
@@ -34,15 +36,19 @@ export class EditorDeDisciplinaComponent {
     try {
       if (this.editando) {
         console.log('editando', this.editando);
-        this.disciplinasService.salvar(this.id, this.nome.value as string, this.descricao.value)
-        /* this.editando = null */
+        this.disciplinasService.salvar(this.id, this.nome.value as string, this.descricao.value).subscribe(() => {
+          this.cancelar()
+          this.router.navigate(['/disciplinas']);
+        });
       } else {
-        this.disciplinasService.salvar(null, this.nome.value as string, this.descricao.value as string)
+        this.disciplinasService.salvar(null, this.nome.value as string, this.descricao.value as string).subscribe(() => {
+          this.cancelar();
+          this.router.navigate(['/disciplinas']);
+        });
       }
     } catch(e) {
       console.log(e)
     }
-    /* this.cancelar(); */
   }
   cancelar() {
     this.id = null;

@@ -31,26 +31,23 @@ export class DisciplinasService {
       return this.http.patch(this.API_URL + "/disciplinas/" + id, {
         nome: disciplina.nome,
         descricao: disciplina.descricao
-      }).subscribe(() => {
-        this.todas().subscribe((data) => this.disciplinas = data)
       })
     } else {
       disciplina.id = this.gerarProximoId()
       console.log('salvar', disciplina)
-      return this.http.post(this.API_URL + '/disciplinas', disciplina, {
-        observe: 'body'
-      })
+      return this.http.post(this.API_URL + '/disciplinas', disciplina)
     }
   }
 
-  excluir(disciplina: number | Disciplina) {
+  excluir(disciplina: number | Disciplina, callback?: () => void) {
     let id;
     if (typeof disciplina == 'number') {
       id = disciplina
     } else {
       id = disciplina.id
     }
-    return this.http.delete(this.API_URL + '/disciplinas/' + id)
+    console.log('excluir', id)
+    return this.http.delete(this.API_URL + '/disciplinas/' + id).subscribe(callback)
   }
 
   encontrar(arg: number | string) {
