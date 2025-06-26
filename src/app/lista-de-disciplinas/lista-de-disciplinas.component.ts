@@ -1,42 +1,37 @@
 import { Component, EventEmitter, input, Input, Output } from '@angular/core';
 import { Disciplina } from './disciplina.model';
+import { DisciplinasService } from '../disciplinas.service';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-lista-de-disciplinas',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './lista-de-disciplinas.component.html',
   styleUrl: './lista-de-disciplinas.component.css'
 })
 
 export class ListaDeDisciplinasComponent {
-  @Input()
   selecionado: Disciplina | null = null;
-
-  @Input()
-  editando: Disciplina | null = null
-
-  @Output()
-  onEditar = new EventEmitter<Disciplina>()
-
-  @Output()
-  onExcluir = new EventEmitter<Disciplina>()
-
-  @Input()
   disciplinas: Disciplina[] = [];
 
-  @Output()
-  onSelecionar = new EventEmitter<Disciplina>()
+  constructor(private disciplinasService: DisciplinasService) {
+    this.atualizarLista()
+  }
 
-  selecionar(disciplina: Disciplina) {
-    this.onSelecionar.emit(disciplina)
+  atualizarLista() {
+    this.disciplinasService.todas().subscribe((allDisciplinas) => this.disciplinas = allDisciplinas)
   }
   
   excluir(disciplina: Disciplina) {
-    this.onExcluir.emit(disciplina)
+    if(confirm(`Tem certeza que deseja excluir a disciplina ${disciplina.nome} ?`)) {
+      this.disciplinasService.excluir(disciplina);
+      this.atualizarLista()
+    }
   }
 
-  editar(disciplina: Disciplina) {
-    this.onEditar.emit(disciplina)
+  selecionar(disciplina: Disciplina) {
+    this.selecionado = disciplina
   }
+
 }

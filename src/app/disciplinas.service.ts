@@ -20,22 +20,20 @@ export class DisciplinasService {
     return this.http.get<Disciplina[]>(this.API_URL + '/disciplinas')
   }
 
-  salvar(id: number | null, nome: string, descricao?: string) {
+  salvar(id: number | null, nome: string, descricao?: string | null) {
     let disciplina = {
       id,
       nome,
       descricao
     }
     if (id) {
-      console.log('salvar', disciplina)
-      return this.http.patch(this.API_URL + "/disciplinas/" + id, disciplina)
-      /* let d = this.encontrar(id);
-      if (d) {
-        d.nome = nome;
-        d.descricao = descricao;
-        return d;
-      }
-      throw new Error('Disciplina não encontrada'); */
+      console.log('editar', disciplina)
+      return this.http.patch(this.API_URL + "/disciplinas/" + id, {
+        nome: disciplina.nome,
+        descricao: disciplina.descricao
+      }).subscribe(() => {
+        this.todas().subscribe((data) => this.disciplinas = data)
+      })
     } else {
       disciplina.id = this.gerarProximoId()
       console.log('salvar', disciplina)
@@ -43,13 +41,6 @@ export class DisciplinasService {
         observe: 'body'
       })
     }
-    /* const disciplina = new Disciplina(this.novo_id, nome, descricao);
-    if (this.disciplinas === null) {
-      this.disciplinas = [];
-    }
-    this.disciplinas.push(disciplina);
-    this.novo_id++; */
-    /* return disciplina; */
   }
 
   excluir(disciplina: number | Disciplina) {
@@ -59,39 +50,12 @@ export class DisciplinasService {
     } else {
       id = disciplina.id
     }
-    console.log(this.API_URL + '/disciplinas/' + id)
     return this.http.delete(this.API_URL + '/disciplinas/' + id)
-   /*  let d = null;
-    if (this.disciplinas === null) {
-      throw new Error('Disciplinas não carregadas');
-    }
-    if (typeof disciplina === 'number') {
-      d = this.encontrar(disciplina);
-      if (!d) {
-        throw new Error('Disciplina não encontrada');
-      }
-    } else {
-      const index = this.disciplinas.indexOf(disciplina);
-      if (index > -1) {
-        this.disciplinas.splice(index, 1);
-      } else {
-        throw new Error('Disciplina não encontrada');
-      }
-    } */
   }
 
-  /* encontrar(arg: number | string): Disciplina | null {
-    return this.http.get<Disciplina | null>(this.API_URL + '/disciplinas/' + arg)
-    if (this.disciplinas === null) {
-      throw new Error('Disciplinas não carregadas');
-    }
-    if (typeof arg === 'number') {
-      return this.disciplinas.find(d => d.id === arg) || null;
-    } else if (typeof arg === 'string') {
-      return this.disciplinas.find(d => d.nome?.toLowerCase() === arg.toLowerCase()) || null;
-    }
-    return null;
-  } */
+  encontrar(arg: number | string) {
+    return this.http.get<Disciplina>(this.API_URL + '/disciplinas/' + arg)
+  }
 
   gerarProximoId() {
     this.todas().subscribe((data) => this.disciplinas = data)

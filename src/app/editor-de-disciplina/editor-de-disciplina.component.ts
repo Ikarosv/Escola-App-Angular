@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Input, Output,  } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output,  } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Disciplina } from '../lista-de-disciplinas/disciplina.model';
+import { ActivatedRoute } from '@angular/router';
+import { DisciplinasService } from '../disciplinas.service';
 
 @Component({
   selector: 'app-editor-de-disciplina',
@@ -9,20 +11,41 @@ import { Disciplina } from '../lista-de-disciplinas/disciplina.model';
   styleUrl: './editor-de-disciplina.component.css'
 })
 export class EditorDeDisciplinaComponent {
-  @Input()
+  private activatedRoute = inject(ActivatedRoute);
+  id: number | null = null;
   nome = new FormControl('');
-  @Input()
-  descricao = new FormControl('');
-  @Input()
+  descricao = new FormControl<string | undefined>('');
   editando: Disciplina | null = null
 
-  @Output()
-  onSalvar = new EventEmitter()
+  constructor(private disciplinasService: DisciplinasService) {
+    this.activatedRoute.params.subscribe((params) => {
+      if (params['id']) {
+        this.disciplinasService.encontrar(params['id']).subscribe((disciplina) => {
+          this.editando = disciplina;
+          this.id = disciplina.id;
+          this.nome.setValue(disciplina.nome);
+          this.descricao.setValue(disciplina.descricao);
+        });
+      }
+    });
+  }
   
   salvar() {
-    this.onSalvar.emit()
+    try {
+      if (this.editando) {
+        console.log('editando', this.editando);
+        this.disciplinasService.salvar(this.id, this.nome.value as string, this.descricao.value)
+        /* this.editando = null */
+      } else {
+        this.disciplinasService.salvar(null, this.nome.value as string, this.descricao.value as string)
+      }
+    } catch(e) {
+      console.log(e)
+    }
+    /* this.cancelar(); */
   }
   cancelar() {
+    this.id = null;
     this.nome.setValue(" ");
     this.descricao.setValue(" ");
     this.editando = null;

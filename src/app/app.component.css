@@ -17,7 +17,8 @@ body {
     margin: 0;
     background: #2c2c2c;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
     color: white;
     display: flex;
     align-items: center;

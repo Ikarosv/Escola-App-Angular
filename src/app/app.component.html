@@ -3,8 +3,8 @@
     <div class="content">
       <div class="left-side">
         <h1 class="capitalize">Olá, Estudante!</h1>
-        <section class="flex gap-20">
-          <app-lista-de-disciplinas
+          <router-outlet></router-outlet>
+          <!-- <app-lista-de-disciplinas
           (onSelecionar)="selecionar($event)"
           (onExcluir)="excluir($event)"
           (onEditar)="editar($event)"
@@ -16,7 +16,7 @@
             [nome]="nome"
             [descricao]="descricao"
             [editando]="editando"
-          />
+          /> -->
           <!-- <section class="flex flex-col gap-5">
             <h2>Cadastrar</h2>
             <p>Use este formulário para cadastrar uma disciplina.</p>
@@ -44,7 +44,6 @@
                 </div>
             </form>
         </section> -->
-        </section>
       </div>
     </div>
   </main>

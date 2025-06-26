@@ -12,7 +12,7 @@
                         }
                     </div>
                     <div class="flex gap-5">
-                        <button (click)="editar(disciplina)" class="btn btn-secondary">Editar</button>
+                        <a [routerLink]="['/editar-disciplina', disciplina.id]" class="btn btn-secondary">Editar</a>
                         <button (click)="excluir(disciplina)" class="btn btn-danger">Excluir</button>
                     </div>
                 </li>

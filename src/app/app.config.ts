@@ -6,5 +6,6 @@ import { DisciplinasService } from './disciplinas.service';
 import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), DisciplinasService, provideHttpClient()]
+  providers: [provideRouter(routes), 
+    provideZoneChangeDetection({ eventCoalescing: true }),DisciplinasService, provideHttpClient()]
 };
