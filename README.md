@@ -1,1 +1,1 @@
-API SECUNDARIA: [text](https://github.com/jacksongomesbr/angular-escola-api)
+Repositório da API: https://github.com/jacksongomesbr/angular-escola-api

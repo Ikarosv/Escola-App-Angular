@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ListaDeDisciplinasComponent } from './lista-de-disciplinas/lista-de-disciplinas.component';
 import { EditorDeDisciplinaComponent } from './editor-de-disciplina/editor-de-disciplina.component';
+import { ErrorComponent } from './error/error.component';
 console.log('app.routes.ts loaded');
 export const routes: Routes = [
   {
@@ -19,5 +20,9 @@ export const routes: Routes = [
   {
     path: 'editar-disciplina/:id',
     component: EditorDeDisciplinaComponent
+  },
+  {
+    path: '**',
+    component: ErrorComponent
   }
 ];

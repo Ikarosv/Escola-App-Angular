@@ -378,6 +378,10 @@ button {
   textarea {
     overflow: auto;
   }
+
+  ul {
+    padding-inline-start: 0px;
+  }
   
   /**
    * 1. Add the correct box sizing in IE 10.
