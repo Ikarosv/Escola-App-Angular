@@ -38,12 +38,10 @@ export class EditorDeDisciplinaComponent {
         console.log('editando', this.editando);
         this.disciplinasService.salvar(this.id, this.nome.value as string, this.descricao.value).subscribe(() => {
           this.cancelar()
-          this.router.navigate(['/disciplinas']);
         });
       } else {
         this.disciplinasService.salvar(null, this.nome.value as string, this.descricao.value as string).subscribe(() => {
           this.cancelar();
-          this.router.navigate(['/disciplinas']);
         });
       }
     } catch(e) {
@@ -55,5 +53,6 @@ export class EditorDeDisciplinaComponent {
     this.nome.setValue(" ");
     this.descricao.setValue(" ");
     this.editando = null;
+    this.router.navigate(['/disciplinas']);
   }
 }
